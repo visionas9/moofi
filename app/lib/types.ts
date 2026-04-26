@@ -11,4 +11,5 @@ export interface Film {
 export interface FilmContextType {
   films: Film[];
   searchFilms: (query: string) => Promise<void>;
+  watchlist: Film[];
 }

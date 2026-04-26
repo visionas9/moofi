@@ -12,6 +12,7 @@ export const ContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [films, setFilms] = useState<Film[]>([]);
+  const [watchlist, setWatchlist] = useState<Film[]>([])
 
   const searchFilms = async (query: string) => {
     const films = await fetchListofFilms(query);
@@ -19,7 +20,7 @@ export const ContextProvider = ({
   };
 
   return (
-    <FilmContext.Provider value={{ films, searchFilms }}>
+    <FilmContext.Provider value={{ films, searchFilms, watchlist }}>
       {children}
     </FilmContext.Provider>
   );
