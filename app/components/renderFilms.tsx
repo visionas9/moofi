@@ -1,13 +1,9 @@
 // renderFilms.tsx
 "use client";
-import { useContext } from "react";
-import { FilmContext } from "../lib/FilmContext";
+import { Film } from "../lib/types";
 import Link from "next/link";
-import Image from "next/image";
 
-export const RenderFilms = () => {
-  const { films } = useContext(FilmContext)!;
-
+export const RenderFilms = ({ films }: { films: Film[] }) => {
   if (films.length === 0) return null;
 
   return (
@@ -18,10 +14,9 @@ export const RenderFilms = () => {
           className="flex flex-row items-start gap-4 bg-surface hover:bg-surface-hover border border-border rounded-xl p-4 transition-colors cursor-pointer"
         >
           <div className="shrink-0">
-            <Image
+            <img
               src={film.poster || "https://placehold.co/100x150"}
               width={100}
-              height={150}
               className="rounded-md object-cover"
               alt={`${film.title} poster`}
               onError={(e) => {
