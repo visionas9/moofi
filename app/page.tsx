@@ -17,7 +17,6 @@ export default function Home() {
       </div>
       <div className="px-5 pb-12 flex flex-col items-center">
         <RenderFilms films={films} />
-        <RenderFilms films={watchlist} />
       </div>
     </main>
   );
