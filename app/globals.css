@@ -1,15 +1,13 @@
-@import "tailwindcss";
-
 @theme {
   --font-sans: var(--font-inter);
   --font-display: var(--font-display);
 
-  /* Color palette */
-  --color-bg: #0a0a0f;
-  --color-surface: #15151d;
-  --color-border: #2a2a35;
-  --color-text: #e8e8ec;
-  --color-muted: #8b8b95;
-  --color-accent: #f5c518; /* IMDb-ish yellow, fitting for a film app */
+  --color-bg: #0a0a0a;
+  --color-surface: #1a1600;
+  --color-surface-hover: #241e00;
+  --color-border: #3d3400;
+  --color-text: #f0f0f0;
+  --color-muted: #9a9a9a;
+  --color-accent: #f5c518;
   --color-accent-hover: #ffd633;
 }
