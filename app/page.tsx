@@ -1,11 +1,15 @@
 import { Header } from "./components/header";
+import { RenderFilms } from "./components/renderFilms";
+import SearchBar from "./components/searchBar";
 
 export default function Home() {
   return (
-    <div>
-      <main>
+    <main>
+      <div className="flex flex-col items-center justify-center py-12 px-5 bg-bg">
         <Header />
-      </main>
-    </div>
+        <SearchBar />
+      </div>
+      <RenderFilms />
+    </main>
   );
 }

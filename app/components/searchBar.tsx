@@ -22,9 +22,6 @@ export default function SearchBar() {
       >
         Search
       </button>
-      {films.map((film) => (
-        <div key={film.imdbId}>{film.title}</div>
-      ))}
     </div>
   );
 }
