@@ -8,7 +8,11 @@ export const RenderFilms = () => {
   const { films } = useContext(FilmContext)!;
 
   const renderFilms = films.map((film) => (
-    <div key={film.imdbId} className="flex">
+    <div
+      key={film.imdbId}
+      className="bg-surface hover:bg-surface-hover border border-border 
+      rounded-xl p-4 transition-colors cursor-pointer"
+    >
       {film.poster && (
         <Image
           src={film.poster}
