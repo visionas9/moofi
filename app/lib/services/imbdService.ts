@@ -9,7 +9,7 @@ export const fetchListofFilms = async (query: string): Promise<Film[]> => {
 
   const data = await res.json();
 
-  if (!data && data.lenght === 0) {
+  if (!data || data.length === 0) {
     throw new Error("the film is not exist!", data);
   }
 

@@ -7,3 +7,8 @@ export interface Film {
   poster?: string;
   imdbUrl: string;
 }
+
+export interface FilmContextType {
+  films: Film[];
+  searchFilms: (query: string) => Promise<void>;
+}
