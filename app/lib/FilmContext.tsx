@@ -12,7 +12,16 @@ export const ContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [films, setFilms] = useState<Film[]>([]);
-  const [watchlist, setWatchlist] = useState<Film[]>([])
+  const [watchlist, setWatchlist] = useState<Film[]>([]);
+ 
+
+  const toggleWatchlist = (film: Film) => {
+    setWatchlist((prev) =>
+      prev.some((f) => f.imdbId === film.imdbId)
+        ? prev.filter((f) => f.imdbId !== film.imdbId)
+        : [...prev, film],
+    );
+  };
 
   const searchFilms = async (query: string) => {
     const films = await fetchListofFilms(query);
@@ -20,7 +29,7 @@ export const ContextProvider = ({
   };
 
   return (
-    <FilmContext.Provider value={{ films, searchFilms, watchlist }}>
+    <FilmContext.Provider value={{ films, searchFilms, watchlist, toggleWatchlist }}>
       {children}
     </FilmContext.Provider>
   );

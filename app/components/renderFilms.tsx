@@ -2,9 +2,19 @@
 "use client";
 import { Film } from "../lib/types";
 import Link from "next/link";
+import { useContext } from "react";
+import { FilmContext } from "../lib/FilmContext";
 
 export const RenderFilms = ({ films }: { films: Film[] }) => {
-  if (films.length === 0) return null;
+  const { toggleWatchlist, watchlist } = useContext(FilmContext)!;
+  console.log(watchlist);
+
+  if (films.length === 0)
+    return (
+      <p className="text-muted text-sm mt-4">
+        No films found. Search something above.
+      </p>
+    );
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl">
@@ -24,7 +34,7 @@ export const RenderFilms = ({ films }: { films: Film[] }) => {
               }}
             />
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 w-[70%]">
             <h2 className="text-text font-semibold text-lg leading-tight">
               {film.title}
             </h2>
@@ -37,6 +47,27 @@ export const RenderFilms = ({ films }: { films: Film[] }) => {
             >
               View on IMDb →
             </Link>
+          </div>
+          <div className="m-auto ">
+            <svg
+              onClick={() => toggleWatchlist(film)}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              fill={
+                watchlist.some((f) => f.imdbId == film.imdbId)
+                  ? "white"
+                  : "none"
+              }
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="cursor-pointer transition-all duration-200"
+            >
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+            </svg>
           </div>
         </div>
       ))}
