@@ -13,5 +13,9 @@ export default function renderWatchlist() {
       </p>
     );
 
-  return <RenderFilms films={watchlist} />;
+  return (
+    <div className="px-5 pb-12 flex flex-col items-center">
+      <RenderFilms films={watchlist} />
+    </div>
+  );
 }

@@ -25,10 +25,13 @@ export const fetchListofFilms = async (query: string): Promise<Film[]> => {
   );
 };
 
-//returns one film with all details(Not needed for now)
-/*const fetchFilmDetails = async () => {
-  const res = await fetch(`https://imdb.iamidiotareyoutoo.com/search?tt=${id}`);
-  const data = await res.json();
+// film details page data fetch
+export const fetchFilmDetails = async (imdbId: string) => {
+  const res = await fetch(
+    `https://www.omdbapi.com/?i=${imdbId}&apikey=${process.env.NEXT_PUBLIC_OMDB_API_KEY}`,
+  );
+  if (!res.ok) throw new Error("Failed to fetch film details");
 
+  const data = await res.json();
   return data;
-};*/
+};

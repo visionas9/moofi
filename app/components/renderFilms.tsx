@@ -4,10 +4,12 @@ import { Film } from "../lib/types";
 import Link from "next/link";
 import { useContext } from "react";
 import { FilmContext } from "../lib/FilmContext";
+import { useRouter } from "next/navigation";
 
 export const RenderFilms = ({ films }: { films: Film[] }) => {
   const { toggleWatchlist, watchlist } = useContext(FilmContext)!;
-  console.log(watchlist);
+
+  const router = useRouter();
 
   if (films.length === 0)
     return (
@@ -20,6 +22,7 @@ export const RenderFilms = ({ films }: { films: Film[] }) => {
     <div className="flex flex-col gap-4 w-full max-w-2xl">
       {films.map((film) => (
         <div
+          onClick={() => router.push(`/film/${film.imdbId}`)}
           key={film.imdbId}
           className="flex flex-row items-start gap-4 bg-surface hover:bg-surface-hover border border-border rounded-xl p-4 transition-colors cursor-pointer"
         >
@@ -41,16 +44,18 @@ export const RenderFilms = ({ films }: { films: Film[] }) => {
             <p className="text-muted text-sm">{film.year}</p>
             <p className="text-muted text-sm line-clamp-2">{film.actors}</p>
             <Link
-              href={film.imdbUrl}
+              href={`/film/${film.imdbId}`}
               className="text-accent hover:text-accent-hover text-sm mt-1 w-fit"
-              target="_blank"
             >
-              View on IMDb →
+              See details →
             </Link>
           </div>
           <div className="m-auto ">
             <svg
-              onClick={() => toggleWatchlist(film)}
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleWatchlist(film);
+              }}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               width="24"

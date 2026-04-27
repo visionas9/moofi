@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { FilmContext } from "./lib/FilmContext";
 
 export default function Home() {
-  const { films, watchlist } = useContext(FilmContext)!;
+  const { films } = useContext(FilmContext)!;
 
   return (
     <main>
