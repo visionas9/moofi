@@ -1,7 +1,6 @@
 // page.tsx
 "use client";
 import { RenderFilms } from "./components/renderFilms";
-
 import SearchBar from "./components/searchBar";
 import { useContext } from "react";
 import { FilmContext } from "./lib/FilmContext";

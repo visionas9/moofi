@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import { NextConfig } from "next";
 
 const nextConfig = {
   images: {
@@ -12,6 +12,9 @@ const nextConfig = {
         hostname: "placehold.co",
       },
     ],
+  },
+  turbopack: {
+    root: __dirname,
   },
 };
 

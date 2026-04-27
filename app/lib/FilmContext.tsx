@@ -1,8 +1,8 @@
 "use client";
-import React, { useState, useContext, createContext } from "react";
-import { Film } from "./types";
+import React, { useState, createContext } from "react";
+import type { Film } from "./types";
 import { fetchListofFilms } from "./services/imbdService";
-import { FilmContextType } from "./types";
+import type { FilmContextType } from "./types";
 
 const FilmContext = createContext<FilmContextType | null>(null);
 
@@ -13,7 +13,6 @@ export const ContextProvider = ({
 }) => {
   const [films, setFilms] = useState<Film[]>([]);
   const [watchlist, setWatchlist] = useState<Film[]>([]);
- 
 
   const toggleWatchlist = (film: Film) => {
     setWatchlist((prev) =>
@@ -29,7 +28,9 @@ export const ContextProvider = ({
   };
 
   return (
-    <FilmContext.Provider value={{ films, searchFilms, watchlist, toggleWatchlist }}>
+    <FilmContext.Provider
+      value={{ films, searchFilms, watchlist, toggleWatchlist }}
+    >
       {children}
     </FilmContext.Provider>
   );

@@ -4,6 +4,7 @@ import { use } from "react";
 import { useState, useEffect } from "react";
 import { fetchFilmDetails } from "@/app/lib/services/imbdService";
 import Link from "next/link";
+import type { FilmDetails } from "@/app/lib/types";
 
 export default function FilmDetails({
   params,
@@ -11,7 +12,7 @@ export default function FilmDetails({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
-  const [details, setDetails] = useState<any>(null);
+  const [details, setDetails] = useState<FilmDetails | null>(null);
 
   useEffect(() => {
     if (id) {

@@ -1,6 +1,6 @@
 // renderFilms.tsx
 "use client";
-import { Film } from "../lib/types";
+import type { Film } from "../lib/types";
 import Link from "next/link";
 import { useContext } from "react";
 import { FilmContext } from "../lib/FilmContext";
