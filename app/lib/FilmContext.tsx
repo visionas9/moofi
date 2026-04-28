@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, createContext, useEffect } from "react";
 import type { Film } from "./types";
-import { fetchListofFilms } from "./services/imbdService";
+import { fetchListofFilms } from "./services/imdbService";
 import type { FilmContextType } from "./types";
 
 const FilmContext = createContext<FilmContextType | null>(null);

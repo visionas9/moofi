@@ -32,6 +32,7 @@ export const fetchFilmDetails = async (
   const res = await fetch(
     `https://www.omdbapi.com/?i=${imdbId}&apikey=${process.env.NEXT_PUBLIC_OMDB_API_KEY}`,
   );
+  if (!res.ok) throw new Error("API failed");
 
   const data = await res.json();
   if (data.Response === "False") throw new Error(data.Error);

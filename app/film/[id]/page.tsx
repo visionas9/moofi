@@ -2,7 +2,7 @@
 "use client";
 import { use } from "react";
 import { useState, useEffect } from "react";
-import { fetchFilmDetails } from "@/app/lib/services/imbdService";
+import { fetchFilmDetails } from "@/app/lib/services/imdbService";
 import Link from "next/link";
 import type { FilmDetails } from "@/app/lib/types";
 
