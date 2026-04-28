@@ -14,11 +14,19 @@ export default function SearchBar() {
           placeholder="Search for a movie..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && searchFilms(query)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              searchFilms(query);
+              setQuery("");
+            }
+          }}
         />
         <button
           className="bg-accent text-bg font-semibold px-4 py-2 rounded-xl hover:bg-accent-hover transition-colors cursor-pointer shrink-0"
-          onClick={() => searchFilms(query)}
+          onClick={() => {
+            searchFilms(query);
+            setQuery("");
+          }}
         >
           Search
         </button>
