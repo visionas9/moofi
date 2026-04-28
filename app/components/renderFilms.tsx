@@ -14,7 +14,7 @@ export const RenderFilms = ({ films }: { films: Film[] }) => {
   if (films.length === 0)
     return (
       <p className="text-muted text-sm mt-4">
-        No films found. Search something above.
+        Search a movie to see the results.
       </p>
     );
 

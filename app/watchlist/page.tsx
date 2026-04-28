@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { FilmContext } from "../lib/FilmContext";
 import { RenderFilms } from "../components/renderFilms";
 
-export default function renderWatchlist() {
+export default function WatchlistPage() {
   const { watchlist } = useContext(FilmContext)!;
 
   if (watchlist.length === 0)

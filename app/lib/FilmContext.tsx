@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import type { Film } from "./types";
 import { fetchListofFilms } from "./services/imbdService";
 import type { FilmContextType } from "./types";
@@ -13,6 +13,7 @@ export const ContextProvider = ({
 }) => {
   const [films, setFilms] = useState<Film[]>([]);
   const [watchlist, setWatchlist] = useState<Film[]>([]);
+  const [error, setError] = useState<string>("");
 
   const toggleWatchlist = (film: Film) => {
     setWatchlist((prev) =>
@@ -23,13 +24,34 @@ export const ContextProvider = ({
   };
 
   const searchFilms = async (query: string) => {
-    const films = await fetchListofFilms(query);
-    setFilms(films);
+    try {
+      const films = await fetchListofFilms(query);
+      setFilms(films);
+      setError("");
+    } catch (err) {
+      setError("No results found. Try something else.");
+      setFilms([]);
+    }
   };
+
+  useEffect(() => {
+    const stored = localStorage.getItem("watchlist");
+    if (stored) setWatchlist(JSON.parse(stored));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("watchlist", JSON.stringify(watchlist));
+  }, [watchlist]);
 
   return (
     <FilmContext.Provider
-      value={{ films, searchFilms, watchlist, toggleWatchlist }}
+      value={{
+        films,
+        searchFilms,
+        watchlist,
+        toggleWatchlist,
+        error,
+      }}
     >
       {children}
     </FilmContext.Provider>

@@ -13,6 +13,7 @@ export interface FilmContextType {
   searchFilms: (query: string) => Promise<void>;
   watchlist: Film[];
   toggleWatchlist: (film: Film) => void;
+  error: string;
 }
 
 export interface FilmDetails {

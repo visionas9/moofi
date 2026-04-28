@@ -13,17 +13,24 @@ export default function FilmDetails({
 }) {
   const { id } = use(params);
   const [details, setDetails] = useState<FilmDetails | null>(null);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
-    if (id) {
-      const getDetails = async () => {
+    if (!id) return;
+    const getDetails = async () => {
+      try {
         const filmDetails = await fetchFilmDetails(id);
         setDetails(filmDetails);
-      };
-      getDetails();
-    }
+      } catch (err) {
+        setError("Failed to load film details.");
+      }
+    };
+    getDetails();
   }, [id]);
-  console.log(details);
+
+  if (error) {
+    return <p className="text-red-500 text-center mt-12">{error}</p>;
+  }
 
   if (!details)
     return <p className="text-muted text-center mt-12">Loading...</p>;

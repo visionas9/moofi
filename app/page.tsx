@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { FilmContext } from "./lib/FilmContext";
 
 export default function Home() {
-  const { films } = useContext(FilmContext)!;
+  const { films, error } = useContext(FilmContext)!;
 
   return (
     <main>
@@ -14,7 +14,8 @@ export default function Home() {
         <SearchBar />
       </div>
       <div className="px-5 pb-12 flex flex-col items-center">
-        <RenderFilms films={films} />
+        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+        {!error && <RenderFilms films={films} />}
       </div>
     </main>
   );
