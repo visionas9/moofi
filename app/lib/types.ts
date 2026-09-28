@@ -1,9 +1,11 @@
 // interfaces goes here
 export interface Film {
   title: string;
-  year: number;
+  // A number in watchlists saved before the switch to OMDb, which sends a string.
+  year: string | number;
   imdbId: string;
-  actors: string;
+  // OMDb's search does not return actors; older saved films still have them.
+  actors?: string;
   poster?: string;
   imdbUrl: string;
 }

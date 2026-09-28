@@ -1,29 +1,38 @@
 import { Film, FilmDetails } from "../types";
 
-// Single call, returns list of films when search (one call, many films)
+// Single call, returns list of films when search (one call, many films).
+// OMDb's own search: the free third-party search API used before went down.
 export const fetchListofFilms = async (query: string): Promise<Film[]> => {
   const res = await fetch(
-    `https://imdb.iamidiotareyoutoo.com/search?q=${encodeURIComponent(query)}`,
+    `https://www.omdbapi.com/?s=${encodeURIComponent(query)}&apikey=${process.env.NEXT_PUBLIC_OMDB_API_KEY}`,
   );
   if (!res.ok) throw new Error("API failed");
 
   const data = await res.json();
 
-  if (!data.description || data.description.length === 0) {
+  // OMDb answers 200 with Response "False" when nothing matches.
+  if (data.Response === "False" || !data.Search?.length) {
     throw new Error("No results found. Try something else.");
   }
 
-  return data.description.map(
-    (film: any): Film => ({
-      title: film["#TITLE"],
-      year: film["#YEAR"],
-      imdbId: film["#IMDB_ID"],
-      actors: film["#ACTORS"],
-      poster: film["#IMG_POSTER"],
-      imdbUrl: film["#IMDB_URL"],
+  return data.Search.map(
+    (film: OmdbSearchResult): Film => ({
+      title: film.Title,
+      year: film.Year,
+      imdbId: film.imdbID,
+      // "N/A" when there is no poster, so the card falls back to a placeholder.
+      poster: film.Poster !== "N/A" ? film.Poster : undefined,
+      imdbUrl: `https://www.imdb.com/title/${film.imdbID}/`,
     }),
   );
 };
+
+interface OmdbSearchResult {
+  Title: string;
+  Year: string;
+  imdbID: string;
+  Poster: string;
+}
 
 // film details page data fetch
 export const fetchFilmDetails = async (

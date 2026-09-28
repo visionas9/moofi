@@ -42,7 +42,9 @@ export const RenderFilms = ({ films }: { films: Film[] }) => {
               {film.title}
             </h2>
             <p className="text-muted text-sm">{film.year}</p>
-            <p className="text-muted text-sm line-clamp-2">{film.actors}</p>
+            {film.actors ? (
+              <p className="text-muted text-sm line-clamp-2">{film.actors}</p>
+            ) : null}
             <Link
               href={`/film/${film.imdbId}`}
               className="text-accent hover:text-accent-hover text-sm mt-1 w-fit"
